@@ -1,0 +1,18 @@
+/* nav */
+nav {
+    border: solid 1px black;
+}
+/* header */
+
+/* main */
+.teddy__card {
+    background-color: rgb(240, 212, 152);
+}
+.teddy__img {
+    width: 100%;
+}
+
+/* .teddy__info {
+    border: blue solid 1px;
+} */
+/* footer */
