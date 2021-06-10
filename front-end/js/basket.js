@@ -1,9 +1,10 @@
+let totalPrice = null;
 function displayBasket() {
     // Récupère (ou non) le panier dans le localStorage  
     let basket = JSON.parse(localStorage.getItem("monPanier"));
     // console.log(basket)
     let msgPanier = document.getElementById('basket__content')
-    let totalPrice = null;
+    
     if (!basket) {  //Si le panier est inexistant
         console.log('vide');
         msgPanier.textContent = 'Votre panier est vide';
@@ -25,7 +26,7 @@ function displayBasket() {
                 '<td><img src="' + product[4] + '" alt="Miniature peluche" width="100" height="100"></td>' +
                 '<td>' + product[2] + '</td>' +
                 '<td>' + product[3] + ' €</td>' +
-                '</td>'
+                '</tr>'
             totalPrice += product[3];   //Incrémente le prix total
             console.log(totalPrice);
         }
@@ -81,14 +82,13 @@ function displayBasket() {
         let textDelete = document.createTextNode('Supprimer le panier');
         main.appendChild(btnDelete).appendChild(linkDelete).appendChild(textDelete);
         linkDelete.classList.add('text-white')
-
-
-
-
+       
     }
 
 
 }
+
+
 
 
 // Fonction d'envoie des données vers le service web
@@ -118,171 +118,46 @@ function sendForm() {
 
     console.log(contact);
 
+    // Fonction générale récuperant la commande et redirection vers la page de la commande
+    collectOrder(contact, products);
+}
 
-    // let response = await fetch('http://localhost:3000/api/teddies/order', {
-    //     method: "POST",
-    //     body: JSON.stringify({contact, products}),
-    //     headers: { "Content-type": "application/json; charset=UTF-8" }
-    // })
-    // .then(function (res) {
-    //     return res
-    // })
-    
-    // const recup = function recupRep(response){
-    //     return response
-    // }
-
-    // console.log(recup)
-        // .then(response => response.json())
-        // .then(response => console.log(response))
-        // .catch (err => console.log(err));
-
-    
-
-//     async function postApi(contact, products) {
-
-//         const  reponse = await fetch('http://localhost:3000/api/teddies/order', {
-//             method: "POST",
-//             body: JSON.stringify({ contact, products }),
-//             headers: { "Content-type": "application/json; charset=UTF-8" }
-//         })
-//             .then(response =>  response.json())
-//             .then(function (json) {
-//                 return json
-//             })     
-//             .catch(err => console.log(err));
-//             return reponse
-
-//     }
-
-//    a= postApi(contact, products)
-//    console.log(a)
-
-    // const postAPI =  (contact, products) => {
-    //     const response =  fetch("http://localhost:3000/api/teddies/order", {
-    //         method: "POST",
-    //         body: JSON.stringify({ contact, products }),
-    //         headers: {
-    //             "Content-Type": "application/json;charset=UTF-8",
-    //         }
-
-    //     })
-
-    //         .then(response => response.json())
-    //         .then(function (json) {
-    //             return json
-    //         })
-    //         .catch(err => console.log(err));
-
-
-    //     orderId = response.orderId  ;
-    //     return orderId
-    //     //return response.json();
-    // };
-
-    // result = postAPI(contact, products)
-    // console.log(result)
-      
-
-    // const retour = async (postApi(contact, products));
-    // console.log(retour)
-
-    // Requête HTTP 
-    // fetch('http://localhost:3000/api/teddies/order', {
-    //     method: "POST",
-    //     header: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({contact, products})
-    // })
-    // .then(function(res) {
-    //     if (res.ok) {
-    //         return res.json();
-    //     }
-    // })
-    // .catch(function (error){
-    //     console.log('Une erreur est produite')
-    // })
-
-    // postApi(contact, products);
-
-    //  async function postApi(contact, products) {
-    //      console.log('etape1');
-    //      const response = resApi(contact, products);
-    //      console.log('etape3')
-    //      console.log(response);
-    //  }
-
-    //  function resApi(contact, products) {
-    //      console.log('etape2');
-    //      return fetch('http://localhost:3000/api/teddies/order', {
-    //             method: "POST",
-    //             header: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({contact, products})
-    //         }).then(function (res) {
-    //             return res.json()
-    //         })
-
-    //  }
-
-
-
-    // const postAPI = async (contact, products) => {
-    //     console.log('coucou')
-    //     const response = await fetch("http://localhost:3000/api/teddies/order", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({ contact, products }),
-    //     });
-
-    //     console.log(response);
-    //     return response.json();
-
-    // };
-
-
-
-
-    // Effaçons le panier vu que la commande est passée
-    // localStorage.removeItem('monPanier');
-    // Ouverture de la page de confirmation
-    // location.replace("confirmation.html")
-
-    
-
-    async function recup(contact, products) {
-        const order = await getProducts(contact, products)
-        console.log(order.orderId)
-    }
-    
-    
-    function getProducts(contact, products) {
-        return fetch('http://localhost:3000/api/teddies/order',{
+async function getOrder(contact, products) {
+    let res = await fetch('http://localhost:3000/api/teddies/order', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ contact, products })
-        })
-            .then(function (res) {
-                return res.json()
-            })
-            .then(function (toto) {
-                return toto
-            })
-            .catch(function (error) {
-                alert(error)
-            })
-    }
-    
-    recup(contact, products);
-
-   
+    })
+        return res.json()
 }
 
+async function collectOrder(contact, products) {
+    try {
+        const order = await getOrder(contact, products)
+        console.log(order) //affiche la réponse de la requete 
+
+        //Récuperation de l'orderId
+        const orderId = order.orderId
+        console.log(orderId)
+
+        //Récupération du prix total
+        console.log(totalPrice);
+
+        //Envoie dans le localStorage
+        let orderFin = [orderId, totalPrice]
+        localStorage.setItem('ordreId', JSON.stringify(orderFin))
+
+        //Supprime le panier dans le localStorage
+        localStorage.removeItem('monPanier')
+
+        //Redirection vers la page de confirmation
+        document.location.href="confirmation.html"
+        
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
