@@ -14,30 +14,79 @@
     <!-- ICON -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
         integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <!-- STYLE -->
+    <link rel="stylesheet" href="../style/style.css">
 
 </head>
 
 <body>
-    <nav class="navbar-expand-md container">
+    <nav class="navbar-expand-md container navbar-dark bg-dark">
         <ul class="navbar-nav">
-            <li class="navbar-item">
+            <li class="navbar-item col-md-3">
                 <a href="../index.html" class="nav-link px-3 font-weight-bold">Accueil</a>
             </li>
-            <div class="col-md-9"></div>
-            <li class="navbar-item">
-                <a href="basket.html" class="nav-link font-weight-bold px-3"><i class="fas fa-shopping-cart"></i> Mon panier</a>
+            <div class="col-sm-0 col-md-6"></div>
+            <li class="navbar-item col-md-3">
+                <a href="basket.html" class="nav-link font-weight-bold px-3"><i class="fas fa-shopping-cart"></i> Mon
+                    panier</a>
             </li>
         </ul>
     </nav>
 
-    <main class="container">
-        <img id="product__img" class="w-50">
-        <h2 id="product__name"></h2>
-        <p id="product__price"></p>
-        <p id="product__description"></p>
-        <p id="product__color" id="product__color">Couleur: <br></p>
-        <button class="product__button mb-3" id="product__btn">Ajouter au panier </button>
+    <main class="container text-center mt-3 mb-3">
+        <img id="product__img" class="w-75 border rounded">
+        <div class="container text-left mt-3 mb-3 border rounded w-75">
+            <h2 id="product__name"></h2>
+            <p id="product__price"></p>
+            <p id="product__description"></p>
+            <label for="pet-select">Couleur:</label>
+            <select name="color" id="color-select">
+
+            </select>
+        </div>
+
+        <button class="product__button mb-3 btn btn__teddy" id="product__btn">Ajouter au panier </button>
     </main>
+
+    <footer>
+        <div class="container bg-dark">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Coordonnées</u></h5>
+
+                    <p class="text-white ml-3 m-0">Orinoco</p>
+                    <p class="text-white ml-3 m-0">1 rue des Pyrenées</p>
+                    <p class="text-white ml-3 m-0">75001 Paris</p>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Informations</u></h5>
+
+                    <p class="text-white ml-3 m-0">Notre histoire</p>
+                    <p class="text-white ml-3 m-0">CGV</p>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Retrouvez-nous sur:</u></h5>
+                    <div class="container">
+                        <i class="fab fa-facebook-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                        <i class="fab fa-instagram-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                        <i class="fab fa-twitter-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                        <i class="fab fa-snapchat-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Questions</u></h5>
+
+                    <p class="text-white ml-3 m-0">FAQ</p>
+                    <p class="text-white ml-3 m-0">Suivi de colis</p>
+                </div>
+
+
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

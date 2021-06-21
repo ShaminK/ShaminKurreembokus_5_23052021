@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <!-- JAVASCRIPT -->
-    
+    <!-- STYLE -->
+    <link rel="stylesheet" href="../style/style.css">
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -18,22 +18,67 @@
 </head>
 
 <body>
-    <nav class="navbar-expand-md container">
+    <nav class="navbar-expand-md container navbar-dark bg-dark">
         <ul class="navbar-nav">
-            <li class="navbar-item">
+            <li class="navbar-item col-md-3">
                 <a href="../index.html" class="nav-link px-3 font-weight-bold">Accueil</a>
             </li>
-            <div class="col-md-9"></div>
-            <li class="navbar-item">
+            <div class="col-sm-0 col-md-6"></div>
+            <li class="navbar-item col-md-3">
                 <a href="basket.html" class="nav-link font-weight-bold px-3"><i class="fas fa-shopping-cart"></i> Mon
                     panier</a>
             </li>
         </ul>
     </nav>
-    <main>
-        
+
+    <div class="jumbotron container">
+        <h1 class="display-4">Félicitation !</h1>
+        <p class="lead">Votre commande a bien été prise en compte</p>
+    </div>
+    <main class="container alert mt-5 mb-5">
+        <h2 class="mb-3">Orinoco vous remercie.</h2>
     </main>
-        
+
+    <footer>
+        <div class="container bg-dark">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Coordonnées</u></h5>
+
+                    <p class="text-white ml-3 m-0">Orinoco</p>
+                    <p class="text-white ml-3 m-0">1 rue des Pyrenées</p>
+                    <p class="text-white ml-3 m-0">75001 Paris</p>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Informations</u></h5>
+
+                    <p class="text-white ml-3 m-0">Notre histoire</p>
+                    <p class="text-white ml-3 m-0">CGV</p>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Retrouvez-nous sur:</u></h5>
+                    <div class="container">
+                        <i class="fab fa-facebook-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                        <i class="fab fa-instagram-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                        <i class="fab fa-twitter-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                        <i class="fab fa-snapchat-square text-white fa-2x col-2 col-md-5 col-lg-2"></i>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-white mt-3 mb-2 ml-3"><u>Questions</u></h5>
+
+                    <p class="text-white ml-3 m-0">FAQ</p>
+                    <p class="text-white ml-3 m-0">Suivi de colis</p>
+                </div>
+
+
+            </div>
+        </div>
+    </footer>
+
     <script type="text/javascript" src="../js/confirmation.js"></script>
 </body>
 

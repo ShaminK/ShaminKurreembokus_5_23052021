@@ -4,15 +4,44 @@ nav {
 }
 /* header */
 
+
+/* ------------------------------------ */
+/* -------------PAGE D'ACCUEIL ---------*/
+/* ------------------------------------ */
 /* main */
-.teddy__card {
-    background-color: rgb(240, 212, 152);
-}
-.teddy__img {
-    width: 100%;
+.card__img {
+    height: 20rem;
 }
 
-/* .teddy__info {
-    border: blue solid 1px;
-} */
+.btn__teddy {
+    background: linear-gradient(0.3turn, #d49a56, #c97afd);
+}
+
+.btn__teddy:hover {
+    filter: brightness(120%);
+}
+
 /* footer */
+
+#display__none {
+    display: none;
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    /* ------------------------------------ */
+    /* -------------PAGE D'ACCUEIL ---------*/
+    /* ------------------------------------ */
+    .card__img {
+        height: 15rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /* ------------------------------------ */
+    /* -------------PAGE D'ACCUEIL ---------*/
+    /* ------------------------------------ */
+    .card__img {
+        height: 10rem;
+    }
+}

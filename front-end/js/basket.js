@@ -1,107 +1,70 @@
-let totalPrice = null;
 function displayBasket() {
-    // Récupère (ou non) le panier dans le localStorage  
+    // Récupère (ou non) le panier du localStorage  
     let basket = JSON.parse(localStorage.getItem("monPanier"));
+    // Récupére (ou non) le prix totale du localStorage
+    let totalPrice = JSON.parse(localStorage.getItem("prixTotal"))
+    
     // console.log(basket)
+    // console.log(totalPrice)
+
     let msgPanier = document.getElementById('basket__content')
     
     if (!basket) {  //Si le panier est inexistant
         console.log('vide');
         msgPanier.textContent = 'Votre panier est vide';
+        let form = document.getElementById('form')
+        form.style.display ="none"
+
     } else {    //Si il y a un panier dans le localStorage
         console.log('rempli');
         msgPanier.textContent = 'Contenu de votre panier';
         let table = document.getElementById('table__basket');
 
         // Ligne de titre du tableau
-        table.innerHTML = '<tr>' +
+        table.innerHTML = '<thead class="thead-dark"><tr>' +
             '<th></th>' +
             '<th>Produit</th>' +
             '<th>Prix</th>' +
-            '</tr>'
+            '</tr></thead>'
 
         for (product of basket) {   //Parcourt le tableau et crée les lignes du tableau
 
             table.innerHTML += '<tr>' +
-                '<td><img src="' + product[4] + '" alt="Miniature peluche" width="100" height="100"></td>' +
-                '<td>' + product[2] + '</td>' +
-                '<td>' + product[3] + ' €</td>' +
+                '<td><img src="' + product['image'] + '" alt="Miniature peluche" width="100" height="100"></td>' +
+                '<td>' + product['name'] + '</td>' +
+                '<td>' + product['price'] + ' €</td>' +
                 '</tr>'
-            totalPrice += product[3];   //Incrémente le prix total
-            console.log(totalPrice);
+            
         }
 
-        table.innerHTML += '<tr>' +
+        table.innerHTML += '<tr class="table-success">' +
             '<td></td>' +
-            '<td>Prix total</td>' +
-            '<td>' + totalPrice + ' €</td>' +   //Affiche le prix total
-            '</td>'
-
-        // Création du formulaire 
-        let main = document.getElementById('main__content');
-        main.innerHTML +=
-            '<form>' +
-
-            '<div class="form-group">' +
-            '<label for="firstName">Votre prénom: </label>' +
-            '<input type="text" name="firstName" id="firstName"  class="form-control" value="nom">' +
-            '</div>' +
-
-            '<div class="form-group">' +
-            '<label for="lastName">Votre Nom: </label>' +
-            '<input type="text" name="lastName" id="lastName" class="form-control"  value="prenom">' +
-            '</div>' +
-
-            '<div class="form-group">' +
-            '<label for="address">Votre adresse: </label>' +
-            '<input type="text" name="address" id="address" class="form-control"  value="adresse">' +
-            '</div>' +
-
-            '<div class="form-group">' +
-            '<label for="city">Votre ville: </label>' +
-            '<input type="text" name="city" id="city" class="form-control"  value="ville">' +
-            '</div>' +
-
-            '<div class="form-group">' +
-            '<label for="email">Votre e-mail: </label>' +
-            '<input type="email" name="email" id="email" class="form-control"  value="mail@mail.fr">' +
-            '</div>' +
-
-            '<a class="btn btn-outline-primary" id="btn-confirm" onclick="sendForm()">Confirmer la commande</a>' +
-
-            '</form><br>'
-
-        // Création du bouton de suppréssion du panier
-        let btnDelete = document.createElement('button');
-        btnDelete.addEventListener('click', function () {
-            localStorage.clear();   //function supprimant le contenu du localStorage
-        })
-        btnDelete.classList.add('btn', 'btn-danger')
-        let linkDelete = document.createElement('a');
-        linkDelete.setAttribute('href', '../index.html');
-        let textDelete = document.createTextNode('Supprimer le panier');
-        main.appendChild(btnDelete).appendChild(linkDelete).appendChild(textDelete);
-        linkDelete.classList.add('text-white')
-       
+            '<td class="font-weight-bold">Prix total</td>' +
+            '<td class="font-weight-bold">' + totalPrice + ' €</td>' +   //Affiche le prix total
+            '</td>'      
     }
 
 
 }
 
-
+function deleteOrder(){
+    localStorage.clear()
+}
 
 
 // Fonction d'envoie des données vers le service web
 
 function sendForm() {
-
-    // Récupération du panier
+    if(!document.forms[0].reportValidity()){
+        return
+    }
+    // Récupération du panier du localStorage
     let basket = JSON.parse(localStorage.getItem("monPanier"));
     console.log(basket)
     // Création du tableau d'Id
     let products = []
     for (id of basket) {
-        products.push(id[1])
+        products.push(id['id'])
     }
     console.log(products)    //Affiche le tableau des ID
 
@@ -122,7 +85,7 @@ function sendForm() {
     collectOrder(contact, products);
 }
 
-async function getOrder(contact, products) {
+async function createOrder(contact, products) {
     let res = await fetch('http://localhost:3000/api/teddies/order', {
         method: "POST",
         headers: {
@@ -135,7 +98,7 @@ async function getOrder(contact, products) {
 
 async function collectOrder(contact, products) {
     try {
-        const order = await getOrder(contact, products)
+        const order = await createOrder(contact, products)
         console.log(order) //affiche la réponse de la requete 
 
         //Récuperation de l'orderId
@@ -143,11 +106,11 @@ async function collectOrder(contact, products) {
         console.log(orderId)
 
         //Récupération du prix total
+        totalPrice = JSON.parse(localStorage.getItem("prixTotal"))
         console.log(totalPrice);
 
         //Envoie dans le localStorage
-        let orderFin = [orderId, totalPrice]
-        localStorage.setItem('ordreId', JSON.stringify(orderFin))
+        localStorage.setItem('orderId', JSON.stringify(orderId))
 
         //Supprime le panier dans le localStorage
         localStorage.removeItem('monPanier')

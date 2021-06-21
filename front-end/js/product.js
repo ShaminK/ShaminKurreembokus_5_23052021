@@ -54,25 +54,60 @@ function displayProductPage(product) {
     const colors = product.colors;
     // console.log(colors);
     for (color of colors) {
-        document.getElementById('product__color').innerHTML += color + " ";
+        document.getElementById('color-select').innerHTML += "<option value="+ color +">"+ color +"</option>"
     }
 }
 
-
+//Fonction qui ajoute le produit dans le panier (localStorage)
 function addProduct(product) {
-    let tableProduct = [product.colors, product._id, product.name, product.price, product.imageUrl, product.description]
-    console.log(tableProduct)
+
+    // Création d'un objet enregistrant les données du produit ajouté au panier
+    let tableProduct = {
+        color : product.colors, 
+        id: product._id,
+        name: product.name,
+        price: product.price,
+        image: product.imageUrl,
+        description: product.description}
+    console.log(tableProduct);
+    console.log(tableProduct['price']);
+
+    //Récupération du panier dans le localStorage
     let basket = JSON.parse(localStorage.getItem("monPanier"));
-    if (basket) {
+
+    //Récperation du prix total dans le local storage
+    let totalPrice = JSON.parse(localStorage.getItem("prixTotal"));
+    console.log(totalPrice)
+    if (basket) {   //Si le panier existe déjà
         console.log('Vrai')
+
+        //Ajoute le nouveau produit dans l'objet basket
         basket.push(tableProduct);
+        //Renvoie la var basket dans le localStorage
         localStorage.setItem("monPanier", JSON.stringify(basket));
+
+        //Ajoute le prix du produit ajouté au panier au prix total
+        totalPrice += tableProduct['price'];
+        console.log(totalPrice)
+        //Renvoie le prix total sans le local storage
+        localStorage.setItem("prixTotal", totalPrice)
+        
         alert('nouveau produit ajouté');
-    } else {
+
+    } else {    //Si le panier n'existe pas encore
         console.log('Faux')
+
+        //Crée un tableau basket
         let basket = [];
+        //Insert le produit dans le tableaux
         basket.push(tableProduct);
+        //Envoie le tableau dans le localStorage
         localStorage.setItem("monPanier", JSON.stringify(basket));
+
+        //Crée une variable pour le prix total
+        let totalPrice = tableProduct['price'];
+        localStorage.setItem("prixTotal" , totalPrice)
+
         alert('produit ajouté');
     }
 }
