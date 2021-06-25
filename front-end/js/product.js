@@ -74,11 +74,17 @@ function addProduct(product) {
 
     //Récupération du panier dans le localStorage
     let basket = JSON.parse(localStorage.getItem("monPanier"));
-
+        if(basket == null){
+            basket = []
+        }
+    
     //Récperation du prix total dans le local storage
     let totalPrice = JSON.parse(localStorage.getItem("prixTotal"));
+    if(totalPrice == null){
+        totalPrice = 0 ;
+    }
     console.log(totalPrice)
-    if (basket) {   //Si le panier existe déjà
+    // if (basket) {   //Si le panier existe déjà
         console.log('Vrai')
 
         //Ajoute le nouveau produit dans l'objet basket
@@ -94,20 +100,5 @@ function addProduct(product) {
         
         alert('nouveau produit ajouté');
 
-    } else {    //Si le panier n'existe pas encore
-        console.log('Faux')
-
-        //Crée un tableau basket
-        let basket = [];
-        //Insert le produit dans le tableaux
-        basket.push(tableProduct);
-        //Envoie le tableau dans le localStorage
-        localStorage.setItem("monPanier", JSON.stringify(basket));
-
-        //Crée une variable pour le prix total
-        let totalPrice = tableProduct['price'];
-        localStorage.setItem("prixTotal" , totalPrice)
-
-        alert('produit ajouté');
-    }
+    
 }

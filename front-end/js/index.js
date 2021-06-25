@@ -4,7 +4,7 @@ main()
 async function main() {
     const products = await getProducts()
     for (let product of products) {
-        displayProducts(product)
+        displayProduct(product)
     }
 
 
@@ -23,7 +23,7 @@ function getProducts() {
         })
 }
 
-function displayProducts(product) {
+function displayProduct(product) {
     document.getElementById('listTeddies').innerHTML +=
 
         '<article class="col-md-4">'+
