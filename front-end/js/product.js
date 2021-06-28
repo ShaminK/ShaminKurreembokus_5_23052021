@@ -20,8 +20,6 @@ async function productPage(idProduct) {
 
 }
 
-
-
 function loadProduct(idProduct) {
     const urlProduct = "http://localhost:3000/api/teddies/" + idProduct;
     // console.log(urlProduct);
@@ -69,8 +67,8 @@ function addProduct(product) {
         price: product.price,
         image: product.imageUrl,
         description: product.description}
-    console.log(tableProduct);
-    console.log(tableProduct['price']);
+    // console.log(tableProduct);
+    // console.log(tableProduct['price']);
 
     //Récupération du panier dans le localStorage
     let basket = JSON.parse(localStorage.getItem("monPanier"));
@@ -83,9 +81,10 @@ function addProduct(product) {
     if(totalPrice == null){
         totalPrice = 0 ;
     }
-    console.log(totalPrice)
+    // console.log(totalPrice)
+    
     // if (basket) {   //Si le panier existe déjà
-        console.log('Vrai')
+        // console.log('Vrai')
 
         //Ajoute le nouveau produit dans l'objet basket
         basket.push(tableProduct);
@@ -94,11 +93,9 @@ function addProduct(product) {
 
         //Ajoute le prix du produit ajouté au panier au prix total
         totalPrice += tableProduct['price'];
-        console.log(totalPrice)
+        // console.log(totalPrice)
         //Renvoie le prix total sans le local storage
         localStorage.setItem("prixTotal", totalPrice)
         
-        alert('nouveau produit ajouté');
-
-    
+        alert('nouveau produit ajouté');   
 }

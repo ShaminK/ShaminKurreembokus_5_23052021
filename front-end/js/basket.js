@@ -10,13 +10,13 @@ function displayBasket() {
     let msgPanier = document.getElementById('basket__content')
     
     if (!basket) {  //Si le panier est inexistant
-        console.log('vide');
+        // console.log('vide');
         msgPanier.textContent = 'Votre panier est vide';
         let form = document.getElementById('form')
         form.style.display ="none"
 
     } else {    //Si il y a un panier dans le localStorage
-        console.log('rempli');
+        // console.log('rempli');
         msgPanier.textContent = 'Contenu de votre panier';
         let table = document.getElementById('table__basket');
 
@@ -43,8 +43,6 @@ function displayBasket() {
             '<td class="font-weight-bold">' + totalPrice + ' €</td>' +   //Affiche le prix total
             '</td>'      
     }
-
-
 }
 
 function deleteOrder(){
@@ -60,13 +58,13 @@ function sendForm() {
     }
     // Récupération du panier du localStorage
     let basket = JSON.parse(localStorage.getItem("monPanier"));
-    console.log(basket)
+    // console.log(basket)
     // Création du tableau d'Id
     let products = []
     for (id of basket) {
         products.push(id['id'])
     }
-    console.log(products)    //Affiche le tableau des ID
+    // console.log(products)    //Affiche le tableau des ID
 
 
 
@@ -79,7 +77,7 @@ function sendForm() {
         "email": document.getElementById('email').value
     }
 
-    console.log(contact);
+    // console.log(contact);
 
     // Fonction générale récuperant la commande et redirection vers la page de la commande
     collectOrder(contact, products);
@@ -99,15 +97,15 @@ async function createOrder(contact, products) {
 async function collectOrder(contact, products) {
     try {
         const order = await createOrder(contact, products)
-        console.log(order) //affiche la réponse de la requete 
+        // console.log(order) //affiche la réponse de la requete 
 
         //Récuperation de l'orderId
         const orderId = order.orderId
-        console.log(orderId)
+        // console.log(orderId)
 
         //Récupération du prix total
         totalPrice = JSON.parse(localStorage.getItem("prixTotal"))
-        console.log(totalPrice);
+        // console.log(totalPrice);
 
         //Envoie dans le localStorage
         localStorage.setItem('orderId', JSON.stringify(orderId))
@@ -121,6 +119,4 @@ async function collectOrder(contact, products) {
     } catch (error) {
         console.log(error)
     }
-
-
 }

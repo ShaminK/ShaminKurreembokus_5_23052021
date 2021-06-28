@@ -1,10 +1,10 @@
 //Récuperation de l'id de commande
 let orderId = JSON.parse(localStorage.getItem("orderId"))
-console.log(orderId)
+// console.log(orderId)
 
 //Récuperation de le prix total de la commande
 let totalPrice = JSON.parse(localStorage.getItem("prixTotal"))
-console.log(totalPrice)
+// console.log(totalPrice)
 
 
 function displayConfirmation(){
@@ -16,8 +16,7 @@ function displayConfirmation(){
     }else{
         // Bloque l'accés à la page de confirmation si le panier est vide en redirigeant vers la page d'accueil
         document.location.href="../index.html"
-    }
-    
+    }  
 }
 displayConfirmation();
 

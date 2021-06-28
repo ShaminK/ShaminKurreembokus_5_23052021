@@ -6,10 +6,9 @@ async function main() {
     for (let product of products) {
         displayProduct(product)
     }
-
-
 }
 
+// Fonction qui récupère les données du service web
 function getProducts() {
     return fetch('http://localhost:3000/api/teddies')
         .then(function (res) {
@@ -23,6 +22,7 @@ function getProducts() {
         })
 }
 
+// Aprés avoir récupèrer les données, insertion dans la page HTML
 function displayProduct(product) {
     document.getElementById('listTeddies').innerHTML +=
 
